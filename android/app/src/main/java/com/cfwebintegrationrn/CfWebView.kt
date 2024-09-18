@@ -2,7 +2,6 @@ package com.cfwebintegrationrn
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.os.Build
 import android.util.Log
 import android.util.Xml
 import android.webkit.ConsoleMessage
@@ -58,7 +57,6 @@ class CfWebView(private val context: Context) : WebView(context) {
             }
         }
         addJavascriptInterface(CFJsBridge(context), "Android")
-        addJavascriptInterface(CFJsBridge(context), "PaymentJSInterface")
     }
 
     fun loadCFPayForm(paymentSessionId: String) {
@@ -72,9 +70,6 @@ class CfWebView(private val context: Context) : WebView(context) {
     }
 
     private fun getCFPayForm(paymentSessionId: String): String {
-        val inputTag = "<input type=\"hidden\" name=\"%s\" value=\"%s\"/>"
-        val platform = "chxx-c-x-x-x-w-x-a-" + Build.VERSION.SDK_INT
-        val url = "https://sandbox.cashfree.com/pg/view/sessions/checkout"
         val iStream = resources.openRawResource(R.raw.cashfree_pay_form)
         val formTemplate = StringBuilder()
 
@@ -90,11 +85,8 @@ class CfWebView(private val context: Context) : WebView(context) {
             Log.d("HTML Exception", "${ignored.message}")
         }
 
-        val formBody = java.lang.StringBuilder()
-        formBody.append(String.format(inputTag, "hideHeader", true))
-        formBody.append(String.format(inputTag, "platform", platform))
-        formBody.append(String.format(inputTag, "payment_session_id", paymentSessionId))
-        val body = String.format(formTemplate.toString(), url, formBody.toString())
+        val environment  = "sandbox"
+        val body = String.format(formTemplate.toString(), environment, paymentSessionId)
         return body
     }
 }

@@ -7,7 +7,6 @@ import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.util.Log
 import android.webkit.JavascriptInterface
-import com.facebook.react.modules.core.RCTNativeAppEventEmitter
 import com.facebook.react.uimanager.ThemedReactContext
 import org.json.JSONArray
 import org.json.JSONObject
@@ -69,15 +68,6 @@ class CFJsBridge(private val context: Context) {
             Log.d("Exception UPI app", "${exception.message}")
         }
         return true
-    }
-
-    @JavascriptInterface
-    fun paymentResponse(jsonResponse: String?) {
-        if(context is ThemedReactContext){
-            context.reactApplicationContext
-                .getJSModule(RCTNativeAppEventEmitter::class.java)
-                .emit("paymentResponse", jsonResponse)
-        }
     }
 
 }
