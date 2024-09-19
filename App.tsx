@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen, { RootStackParamList } from './HomeScreen';
 import PaymentScreen from './PaymentScreen';
+import WebsitePaymentScreen from './WebSitePaymentScreen';
 
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -19,6 +20,7 @@ function App(): React.JSX.Element {
       <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+        <Stack.Screen name="WebsitePaymentScreen" component={WebsitePaymentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -5,6 +5,7 @@ import { StackNavigationProp }  from '@react-navigation/stack';
 export type RootStackParamList = {
     HomeScreen: undefined; 
     PaymentScreen: undefined;
+    WebsitePaymentScreen: undefined;
   };
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'HomeScreen'>;
@@ -18,6 +19,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     navigation.navigate('PaymentScreen'); 
   };
 
+  const websitePaymentScreen = () => {
+    navigation.navigate('WebsitePaymentScreen'); 
+  };
+
   let paymentResponseFunction = (response: string) => {
     console.log('response is : ' + JSON.stringify(response));
     navigation.navigate('HomeScreen');
@@ -27,8 +32,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Button
-        title="Open Payment Page"
+        title="Payment Page with Android JS bridge"
         onPress={onClick}
+      />
+      <View style={{ width: 50, height: 50,}} />
+      <Button
+        title="Website JS Integration PaymentScreen"
+        onPress={websitePaymentScreen}
       />
     </View>
   );
