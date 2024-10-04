@@ -59,17 +59,17 @@ class CfWebView(private val context: Context) : WebView(context) {
         addJavascriptInterface(CFJsBridge(context), "Android")
     }
 
-    fun loadCFPayForm(paymentSessionId: String) {
+    fun loadCFPayForm(paymentSessionId: String, env: String) {
         loadDataWithBaseURL(
             "",
-            getCFPayForm(paymentSessionId),
+            getCFPayForm(paymentSessionId, env),
             "text/html",
             Xml.Encoding.UTF_8.name,
             ""
         )
     }
 
-    private fun getCFPayForm(paymentSessionId: String): String {
+    private fun getCFPayForm(paymentSessionId: String, env: String): String {
         val iStream = resources.openRawResource(R.raw.cashfree_pay_form)
         val formTemplate = StringBuilder()
 
@@ -85,8 +85,7 @@ class CfWebView(private val context: Context) : WebView(context) {
             Log.d("HTML Exception", "${ignored.message}")
         }
 
-        val environment  = "sandbox"
-        val body = String.format(formTemplate.toString(), environment, paymentSessionId)
+        val body = String.format(formTemplate.toString(), env, paymentSessionId)
         return body
     }
 }
