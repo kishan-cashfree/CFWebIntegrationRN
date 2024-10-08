@@ -12,7 +12,7 @@ class CfWebViewPackage : ReactPackage {
     override fun createViewManagers(context: ReactApplicationContext): MutableList<ViewManager<*, *>> {
         val list = mutableListOf<ViewManager<*, *>>().apply {
             add(CFWebViewModule(context))
-            add(CFRNCWebViewManager())
+            add(CFRNCWebViewManager(context))
         }
         return list
     }
@@ -20,7 +20,7 @@ class CfWebViewPackage : ReactPackage {
     override fun createNativeModules(context: ReactApplicationContext): MutableList<NativeModule> {
         val list = mutableListOf<NativeModule>().apply {
             add(CFWebViewModule(context))
-            add(CFRNCWebViewManager())
+            add(CFRNCWebViewManager(context))
         }
         return list
     }
