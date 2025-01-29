@@ -5,28 +5,30 @@ import { WebView } from 'react-native-webview';
 const WebsiteDefaultUpiPaymentScreen: React.FC = ({ }) => {
   
   const checkIsUPIIntentLink = (link: string)=>{
-    if(link != undefined && 
-         (link.startsWith("upi://pay")
-         || link.startsWith("tez://")|| link.startsWith("gpay://")
-         || link.startsWith("paytmmp://")
-         || link.startsWith("phonepe://"))
+    // eslint-disable-next-line eqeqeq
+    if(link != undefined &&
+         (link.startsWith('upi://pay')
+         || link.startsWith('tez://')|| link.startsWith('gpay://')
+         || link.startsWith('paytmmp://')
+         || link.startsWith('phonepe://'))
     ){
-      return true
+      return true;
     }
-    return false
-  }
+    return false;
+  };
     return (
         <WebView
-        source={{ uri: 'https://internal.prodint.cashfree.com/checkout?pt=session_soPoDKVZ1XV3mC-fYzG1GLYcWvkgUEku2AC_9p5A1Gp_0XKZUkiXLXWTEMOvIg3pF0BwgvXsiY0a72b7GIPwhcyEfo_zSEQ_GZ5RtD3f7OxD' }}
+        source={{ uri: 'https://internal.prodint.cashfree.com/checkout?pt=session_gtWonxb3Ar1da2aDwulXbrQu6PVufNjZ6GASzzFWdut_f466GAe9M8ELVHuuqMrvyC8pCtoMzCvF2N8JsmaqYzGmoZBV3wsPBtBQr6ONLFgXcY39mVBAzecpayment' }}
         style={{ flex: 1 }} 
         onShouldStartLoadWithRequest={event => {
-          console.log("Current URL Loading", event.url)
+          console.log('Current URL Loading', event.url);
           if(checkIsUPIIntentLink(event.url)) {
           Linking.canOpenURL(event.url).then(supported => {
                   if (supported) {
-                        Linking.openURL(event.url);
+                    console.log('able to open');
+                    Linking.openURL(event.url);
                   }else{
-                      console.log("Not able to open")
+                      console.log('Not able to open');
                   }
                 });
                 return false;
@@ -36,5 +38,4 @@ const WebsiteDefaultUpiPaymentScreen: React.FC = ({ }) => {
         />
       );
 };
-  
 export default WebsiteDefaultUpiPaymentScreen;
