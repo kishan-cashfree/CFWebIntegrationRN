@@ -2,9 +2,9 @@ import React from 'react';
 import CFWebView from './native/CFWebView';
 
 const WebsitePaymentScreen: React.FC = ({ }) => {
-  
+
   return (
-    <CFWebView 
+    <CFWebView
     source={{uri: 'https://discoverpilgrim.com/'}}
     />
     );
